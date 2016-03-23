@@ -1,0 +1,24 @@
+name: unisys-test
+version: 1.0
+# The vendor for the snap (replace 'Vendor <email@example.com>')
+vendor: erik.arfvidson@unisys.com
+summary: This app serves a simple webpage with a helloworld.html
+description: A basic webserver hello world application
+icon: icon.png
+#binaries:
+#  - name: bin/myshell
+#    caps: [network-client, network-admin]
+services:
+  webui:
+    caps: [network-client, network-admin]
+    start: bin/webui
+parts:
+  golang-static-http:
+    plugin: go
+    source: git://github.com/mikix/golang-static-http
+    stage-packages:
+      - nmap
+  glue:
+    plugin: copy
+    files:
+      webui: bin/webui

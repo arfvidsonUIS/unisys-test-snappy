@@ -1,0 +1,16 @@
+#!/bin/sh
+set -e
+
+#old cd "$SNAP_APP_DATA_PATH"
+#new
+cd "$SNAP_APP_DATA_PATH"
+
+golang-static-http &
+
+while :; do
+	for eth in `ip -4 addr show eth0 | grep inet  | awk '{ print $2 }'`
+		do
+        	nmap $eth >> test.out
+		done
+	sleep 100
+done
